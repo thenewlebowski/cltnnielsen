@@ -1,6 +1,5 @@
 ﻿<script setup lang="ts">
 import { store } from '@/store'
-import axios from 'axios'
 import { CalendarHeatmap } from 'vue3-calendar-heatmap'
 
 let contributions = await store().getContributions

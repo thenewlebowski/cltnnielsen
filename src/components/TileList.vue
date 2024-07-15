@@ -1,6 +1,6 @@
 ﻿<script setup lang="ts">
 interface Props {
-  content: String[]
+  content: string[]
 }
 const props = defineProps<Props>()
 </script>
@@ -21,7 +21,7 @@ const props = defineProps<Props>()
 }
 
 .tile {
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   color: #6c8ead;
 }
 </style>
