@@ -57,6 +57,7 @@ const langs = [
   'Rust',
   'Unreal',
   'Blender',
+  'Go',
   'C++',
   'Typescript',
   'Java',
