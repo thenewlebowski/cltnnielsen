@@ -14,11 +14,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: build
+        
+      - name: setup
         uses: actions/setup-node@v3
         with:
           node-version: 18.x
+
+      - name: build
         run: |
           npm install
           npm run build
