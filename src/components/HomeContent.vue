@@ -1,57 +1,9 @@
 <script setup lang="ts">
 import { JobCard, TileList } from '@/components'
 import ContributionHeatmap from '@/components/ContributionHeatmap.vue'
+import { store } from '@/store'
 
-let jobs = [
-  {
-    picture: 'https://cdn.hyperbolic.studio/images/plumbersstock.png',
-    title: 'Plumbersstock',
-    description:
-      'An application built using Laravel 7 and MySQL. Helped integrate third party platforms and increased profit margins by 5% by optimizing database performance.',
-    tool: 'Laravel',
-    position: 'Web Developer'
-  },
-  {
-    picture: 'picture',
-    title: 'Mercury',
-    description:
-      'A tool used by Dynata partners to set up small market insight observations that would be executed and prioritized higher than our broad tools like CMIX.',
-    position: 'Software Engineer',
-    tool: 'Go & React'
-  },
-  {
-    picture: 'https://cdn.hyperbolic.studio/images/gogrello.png',
-    title: 'GoGrello',
-    description:
-      'The task management software that Gogreen went on to use as their primary task management software. It easily integrated with Eclipse (our inventory management software) and made communication with product management simpler and more efficient.',
-    position: 'Web Developer',
-    tool: 'Vue & Nuxt'
-  },
-  {
-    title: 'Respondent Exchange (REX)',
-    picture: 'https://cdn.hyperbolic.studio/images/rust-logo-512x512.png',
-    description:
-      'A information exchange system developed for sharing and networking respondent data internally and between our partners. This system was build entirely using rust with the communication layer leveraging gRPC.',
-    position: 'Senior Software Engineer',
-    tool: 'Rust & gRPC'
-  },
-  {
-    picture: 'picture',
-    title: 'Partner Portal',
-    position: 'Senior Software Engineer',
-    tool: 'Rust & React',
-    description:
-      'A metric, configuration, & optimization tool for partners to provide realtime market feedback data. Introduced seamless partner integration into the REX project to cut out pre-existing redundant work.'
-  },
-  {
-    picture: 'https://cdn.hyperbolic.studio/images/python-logo-only.png',
-    title: 'Natural Language Compiler',
-    position: 'Software Engineer',
-    description:
-      'An A.I. solution that enabled partners to write more effective market surveys to give better insights into their products and how they could improve on them. When used internally this increased our production releases by 50%!',
-    tool: 'Python & Go'
-  }
-]
+let jobs = await store().getJobs
 
 const langs = [
   'Rust',

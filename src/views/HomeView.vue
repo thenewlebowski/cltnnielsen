@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import {
-  HomeContent,
-  HomeHeader,
-  HomeFooter
-} from '@/components';
+import { HomeContent, HomeHeader, HomeFooter } from '@/components'
 </script>
 
 <template>
   <main>
     <HomeHeader />
-    <HomeContent />
+    <Suspense>
+      <HomeContent />
+    </Suspense>
     <HomeFooter />
   </main>
 </template>
