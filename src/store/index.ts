@@ -11,7 +11,8 @@ interface Job {
 }
 
 interface State {
-  contributions: any[]
+  contributions: Value[]
+  expertise: string[]
   jobs: Job[]
 }
 
@@ -19,6 +20,7 @@ const store = defineStore('store', {
   state: (): State => {
     return {
       contributions: [],
+      expertise: [],
       jobs: []
     }
   },
@@ -30,6 +32,14 @@ const store = defineStore('store', {
           .then((res) => (state.contributions = res.data.contributions))
       }
       return state.contributions
+    },
+    getExpertise: async (state): Promise<string[]> => {
+      if (state.contributions.length <= 0) {
+        await axios
+          .get('https://api.cltnnielsen.com/expertise')
+          .then((res) => (state.contributions = res.data.contributions))
+      }
+      return state.expertise
     },
     getJobs: async (state: State): Promise<Job[]> => {
       if (state.contributions.length <= 0) {

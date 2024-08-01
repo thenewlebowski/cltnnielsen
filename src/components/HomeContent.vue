@@ -5,6 +5,8 @@ import { store } from '@/store'
 
 let jobs = await store().getJobs
 
+let expertise = await store().getExperties
+
 const langs = [
   'Rust',
   'Unreal',
