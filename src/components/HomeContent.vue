@@ -5,31 +5,7 @@ import { store } from '@/store'
 
 let jobs = await store().getJobs
 
-let expertise = await store().getExperties
-
-const langs = [
-  'Rust',
-  'Unreal',
-  'Blender',
-  'Go',
-  'C++',
-  'Typescript',
-  'Java',
-  'C#',
-  'Perforce',
-  'Git',
-  'Github',
-  'Vue',
-  'React',
-  'Mongo',
-  'Dynamo',
-  'Node.js',
-  'Docker',
-  'Kubernetes',
-  'Linux',
-  'AWS',
-  'Google Cloud'
-]
+let expertise = await store().getExpertise
 </script>
 
 <template>
@@ -56,7 +32,7 @@ const langs = [
   </p>
 
   <h2 class="content-header">Technical Expertise:</h2>
-  <TileList :content="langs" />
+  <TileList :content="expertise" />
   <Suspense fallback="loading">
     <ContributionHeatmap />
   </Suspense>

@@ -1,6 +1,8 @@
 ﻿import { createPinia, defineStore } from 'pinia'
 import axios from 'axios'
 import type { Value } from 'vue3-calendar-heatmap'
+import { getApp } from 'firebase/app'
+import { collection, getDocs, getFirestore, initializeFirestore } from 'firebase/firestore/lite'
 
 interface Job {
   description: string
@@ -35,17 +37,26 @@ const store = defineStore('store', {
     },
     getExpertise: async (state): Promise<string[]> => {
       if (state.contributions.length <= 0) {
-        await axios
-          .get('https://api.cltnnielsen.com/expertise')
-          .then((res) => (state.contributions = res.data.contributions))
+        const db = getFirestore(getApp(), 'cltnnielsen-api')
+        const expertise = await getDocs(collection(db, 'expertise'))
+        state.expertise = expertise.docs.map((doc) => doc.data().lang)
       }
       return state.expertise
     },
     getJobs: async (state: State): Promise<Job[]> => {
       if (state.contributions.length <= 0) {
-        await axios
-          .get('https://api.cltnnielsen.com/experience')
-          .then((res) => (state.jobs = res.data))
+        const db = getFirestore(getApp(), 'cltnnielsen-api')
+        const experience = await getDocs(collection(db, 'experience'))
+        state.jobs = experience.docs.map((doc) => {
+          const data = doc.data()
+          return {
+            description: data.description,
+            position: data.position,
+            picture: data.picture,
+            title: data.title,
+            tool: data.tool
+          }
+        })
       }
       return state.jobs
     }
