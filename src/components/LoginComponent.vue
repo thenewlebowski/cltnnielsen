@@ -1,11 +1,13 @@
 ﻿<script setup lang="ts">
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import FontAwesomeIcon from '@/components/FontAwesomeIcon.vue'
 import { type Ref, ref } from 'vue'
 import { LogoVideo } from '@/components'
 import { useRouter } from 'vue-router'
+import { useFirebaseAuth } from 'vuefire'
 
-let router = useRouter()
+const auth = useFirebaseAuth()
+const router = useRouter()
 
 type Data = {
   password: string | null
@@ -36,11 +38,8 @@ let login = () => {
   }
   if (!data.email || !data.password) return
 
-  signInWithEmailAndPassword(getAuth(), data.email, data.password)
-    .then(() => {
-      console.log(getAuth().currentUser)
-      router.push('/')
-    })
+  signInWithEmailAndPassword(auth, data.email, data.password)
+    .then(() => router.push('/'))
     .catch(() => (error.value = { ...error.value, email: 'email or password is incorrect' }))
 }
 </script>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { getAuth } from 'firebase/auth'
+import { useCurrentUser } from 'vuefire'
 
 const ActionView = () => import('@/views/ActionView.vue')
 const AuthView = () => import('@/views/AuthView.vue')
@@ -22,7 +22,7 @@ const router = createRouter({
       path: '/auth',
       name: 'Auth',
       beforeEnter: () => {
-        if (getAuth().currentUser) router.push('/profile')
+        if (useCurrentUser()) router.push('/profile')
       },
       component: AuthView
     },

@@ -1,12 +1,18 @@
 import './assets/main.css'
 
 import { createApp } from 'vue'
-import { initializeApp } from 'firebase/app'
 import { pinia } from '@/store'
 import router from '@/router'
 import axios from '@/axios'
 import App from './App.vue'
-import { browserLocalPersistence, getAuth } from 'firebase/auth'
+import { VueFire, VueFireAuthWithDependencies } from 'vuefire'
+import { initializeApp } from 'firebase/app'
+import {
+  debugErrorMap,
+  prodErrorMap,
+  indexedDBLocalPersistence,
+  browserLocalPersistence
+} from 'firebase/auth'
 
 const config = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
@@ -16,8 +22,21 @@ const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
+const firebase = initializeApp(config)
 
-initializeApp(config)
-await getAuth().setPersistence(browserLocalPersistence)
-
-createApp(App).use(router).use(pinia).use(axios).mount('#app')
+createApp(App)
+  .use(router)
+  .use(pinia)
+  .use(axios)
+  .use(VueFire, {
+    firebaseApp: firebase,
+    modules: [
+      VueFireAuthWithDependencies({
+        dependencies: {
+          errorMap: process.env.NODE_ENV !== 'production' ? debugErrorMap : prodErrorMap,
+          persistence: [indexedDBLocalPersistence, browserLocalPersistence]
+        }
+      })
+    ]
+  })
+  .mount('#app')
