@@ -7,6 +7,7 @@ import axios from '@/axios'
 import App from './App.vue'
 import { VueFire, VueFireAuthWithDependencies } from 'vuefire'
 import { initializeApp } from 'firebase/app'
+import { initializeAnalytics } from 'firebase/analytics'
 import {
   debugErrorMap,
   prodErrorMap,
@@ -23,6 +24,7 @@ const config = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 }
 const firebase = initializeApp(config)
+initializeAnalytics(firebase)
 
 createApp(App)
   .use(router)

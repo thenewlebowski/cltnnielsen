@@ -36,8 +36,7 @@ let login = () => {
   if (!data.password) {
     error.value = { ...error.value, password: 'please define password' }
   }
-  if (!data.email || !data.password) return
-
+  if (!auth || !data.email || !data.password) return
   signInWithEmailAndPassword(auth, data.email, data.password)
     .then(() => router.push('/'))
     .catch(() => (error.value = { ...error.value, email: 'email or password is incorrect' }))
