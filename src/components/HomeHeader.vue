@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import LogoGIF from '@/components/LogoGIF.vue'
+
 const links = [
   {
     href: 'https://github.com/thenewlebowski',
@@ -13,17 +15,17 @@ const links = [
   {
     icon: 'youtube',
     text: 'Youtube',
-    href: 'https://www.youtube.com/@thenewlebowski',
+    href: 'https://www.youtube.com/@thenewlebowski'
   },
   {
     icon: 'twitch',
     href: 'https://www.twitch.tv/thenewlebowski',
-    text: 'Twitch',
+    text: 'Twitch'
   },
   {
     icon: 'twitter',
     text: 'Twitter',
-    href: 'https://twitter.com/thenewlebowski',
+    href: 'https://twitter.com/thenewlebowski'
   },
   {
     text: 'Resume',
@@ -34,24 +36,21 @@ const links = [
 
 <template>
   <div class="header">
-<!--    <div class="title-container">-->
+    <!--    <div class="title-container">-->
 
-      <div class="title">
-        <h1>
-          <video playsinline loop autoplay preload="metadata" class="logo">
-            <source src="https://cdn.hyperbolic.studio/videos/hyperbolic-logo.mp4" type="video/mp4" />
-            Your browser does not support the video tag or the file format of this video.
-          </video>
-          Colton Nielsen
-        </h1>
-        <small>Senior Software Engineer | Gameplay Programmer</small>
-      </div>
-    
-<!--    </div>-->
+    <div class="title">
+      <h1>
+        <LogoGIF :size="50" />
+        Colton Nielsen
+      </h1>
+      <small>Senior Software Engineer | Gameplay Programmer</small>
+    </div>
+
+    <!--    </div>-->
     <div class="links">
       <a v-for="link in links" :key="link.icon" :href="link.href">
-        <i v-if="link.icon"  :class="`fa-brands fa-${link.icon}`"></i>
-        <p v-if="!link.icon" class="bordered-text">{{link.text}}</p>
+        <i v-if="link.icon" :class="`fa-brands fa-${link.icon}`"></i>
+        <p v-if="!link.icon" class="bordered-text">{{ link.text }}</p>
       </a>
     </div>
   </div>
@@ -67,14 +66,8 @@ const links = [
   background: #3a3335;
 }
 
-.logo {
-  display: inline;
-  border-radius: 50px;
-  height: 50px;
-}
-
 .title-container {
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column-reverse;
 }
@@ -118,7 +111,6 @@ const links = [
 
   .title h1 {
     justify-content: left;
-
   }
 
   .links {

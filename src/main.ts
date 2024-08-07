@@ -6,7 +6,7 @@ import { pinia } from '@/store'
 import router from '@/router'
 import axios from '@/axios'
 import App from './App.vue'
-import { signInWithEmailAndPassword } from 'firebase/auth/web-extension'
+import { browserLocalPersistence, getAuth } from 'firebase/auth'
 
 const config = {
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
@@ -18,5 +18,6 @@ const config = {
 }
 
 initializeApp(config)
+await getAuth().setPersistence(browserLocalPersistence)
 
 createApp(App).use(router).use(pinia).use(axios).mount('#app')

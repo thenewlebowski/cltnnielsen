@@ -3,9 +3,9 @@ import { JobCard, TileList } from '@/components'
 import ContributionHeatmap from '@/components/ContributionHeatmap.vue'
 import { store } from '@/store'
 
-let jobs = await store().getJobs
-
-let expertise = await store().getExpertise
+store().getJobs
+store().getExpertise
+store().getContributions
 </script>
 
 <template>
@@ -23,8 +23,9 @@ let expertise = await store().getExpertise
   </div>
   <h2 class="content-header">Experience:</h2>
   <div class="experience-container">
-    <JobCard v-for="(job, i) in jobs" :key="i" :job="job" />
+    <JobCard v-for="(job, i) in store().$state.jobs" :key="i" :job="job" />
   </div>
+
   <p class="content-redirect">
     <a class="bordered-text" @click="$router.push('/experience')"
       >More<i class="fa-solid fa-arrow-right"></i
@@ -32,10 +33,10 @@ let expertise = await store().getExpertise
   </p>
 
   <h2 class="content-header">Technical Expertise:</h2>
-  <TileList :content="expertise" />
-  <Suspense fallback="loading">
-    <ContributionHeatmap />
-  </Suspense>
+  <TileList :content="store().$state.expertise" />
+
+  <ContributionHeatmap v-if="store().$state.contributions" />
+
   <!--  <h2 class="content-header">Recent Blog Posts:</h2>-->
   <!--  <p class="content-redirect">-->
   <!--    <a  class="bordered-text" @click="$router.push('/posts')">More<i class="fa-solid fa-arrow-right"></i></a>-->

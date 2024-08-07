@@ -5,9 +5,7 @@ import { HomeContent, HomeHeader, HomeFooter } from '@/components'
 <template>
   <main>
     <HomeHeader />
-    <Suspense>
-      <HomeContent />
-    </Suspense>
+    <HomeContent />
     <HomeFooter />
   </main>
 </template>
